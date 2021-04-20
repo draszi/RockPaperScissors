@@ -32,13 +32,19 @@ function computerPlay(){
 }
 
 let humanPlay = () => 
-    prompt('Pick Rock, Paper or Scissors').toLowerCase()
+    prompt('Pick Rock, Paper or Scissors').toLowerCase();
 
+let wrongHumanPlay = () => 
+    prompt(`That's not a valid option. 
+Pick Rock, Paper or Scissors`).toLowerCase();
 
 //round function, determines who wins
 function round(humanSelection, computerSelection = computerPlay()){
     if (humanSelection == null){
-        humanSelection = humanPlay();
+        humanSelection = wrongHumanPlay();
+    }
+    else if (humanSelection !== 'scissors' && humanSelection !== 'rock' && humanSelection !== 'paper'){
+        humanSelection = wrongHumanPlay();
     }
     computerSelection = computerPlay();
     // console.log(computerSelection)
@@ -58,7 +64,6 @@ function round(humanSelection, computerSelection = computerPlay()){
             cWins++;
         }
     }
-
     else if (computerSelection == 'paper'){
         if (humanSelection == 'paper'){
             outcome = 'Tie';
@@ -72,7 +77,6 @@ function round(humanSelection, computerSelection = computerPlay()){
             cWins++;
         }
     }
-
     else if (computerSelection == 'scissors'){
         if (humanSelection == 'scissors'){
             outcome = 'Tie';
@@ -111,7 +115,7 @@ function game(rounds, humanSelection){
     }
 
     for (let i=0;i<rounds;i++){
-        round(humanSelection);
+        round(humanSelection.toLowerCase());
         console.log(`Human wins: ${hWins}   Computer wins: ${cWins}`);
     }
     return (hWins==cWins) ? 'Ties game':

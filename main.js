@@ -106,22 +106,32 @@ let cWins = 0;
 //  game(3,'paper') -> plays 3 rounds, paper hand for human each time
 //  game('paper',3) -> same as above
 function game(rounds, humanSelection){
-
+    let temp;
     //checks to see if rounds is not a number, 
     //if true, sets humanSelection to whatever value inputted and defaults rounds to 5
-    if (isNaN(rounds)){
-        humanSelection = rounds;
+    if (rounds == null && humanSelection == null){
         rounds = 5;
+    }
+    else if (isNaN(rounds)){
+        if(!isNaN(humanSelection)){
+            temp = rounds;
+            rounds = humanSelection;
+            humanSelection = temp;
+        }
+        else{
+            humanSelection = rounds;
+            rounds = 5;
+        }
     }
     
     for (let i=0;i<rounds;i++){
         if(humanSelection == null){
-            round(humanSelection);
-        } round(humanSelection.toLowerCase());
+            round();
+        }else{round(humanSelection);}
         console.log(`Human wins: ${hWins}   Computer wins: ${cWins}`);
     }
     return (hWins==cWins) ? 'Ties game':
-        (hWins>cWins) ? 'Humans win' : 'Computer wins';
+        (hWins>cWins) ? 'You win' : 'Computer wins';
             
 }
 //test function to see if computerPlay was setting values equally

@@ -41,7 +41,7 @@ Pick Rock, Paper or Scissors`).toLowerCase();
 //round function, determines who wins
 function round(humanSelection, computerSelection = computerPlay()){
     if (humanSelection == null){
-        humanSelection = wrongHumanPlay();
+        humanSelection = humanPlay();
     }
     else if (humanSelection !== 'scissors' && humanSelection !== 'rock' && humanSelection !== 'paper'){
         humanSelection = wrongHumanPlay();
@@ -113,9 +113,11 @@ function game(rounds, humanSelection){
         humanSelection = rounds;
         rounds = 5;
     }
-
+    
     for (let i=0;i<rounds;i++){
-        round(humanSelection.toLowerCase());
+        if(humanSelection == null){
+            round(humanSelection);
+        } round(humanSelection.toLowerCase());
         console.log(`Human wins: ${hWins}   Computer wins: ${cWins}`);
     }
     return (hWins==cWins) ? 'Ties game':

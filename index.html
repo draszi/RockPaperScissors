@@ -7,9 +7,24 @@
     <title>Document</title>
 </head>
 <body>
+<div id="mainmenu">
+    <button id="start-game">Start Game</button>
+</div>
 
-    
-    
+<span class="roundpick hide">
+    <label for="rounds">How many rounds would you like to play for?</label>
+    <input type="number" id="rounds" name="rounds"
+       min="3" max="10">
+</span>
+
+<div id='hands' class="game hide">
+    <button id="Rock">Rock</button>
+    <button id="Paper">Paper</button>
+    <button id="Scissors">Scissors</button>
+</div>
+<button id="quit">Quit</button>
+
 <script src="main.js"></script>
+
 </body>
 </html>

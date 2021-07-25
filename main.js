@@ -29,8 +29,10 @@ function round(humanSelection, computerSelection = computerPlay()) {
     Computer Wins: ${roundScoreComputer} Your Wins: ${roundScoreHuman}`);
 }
 
+//gets all buttons under tag with id hands
 const hands = document.querySelectorAll("#hands button");
 
+//loops through each and runs round with the id as input (rock paper or scissors)
 hands.forEach((button) => {
   button.addEventListener("click", () => {
     round(button.id);

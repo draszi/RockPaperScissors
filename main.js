@@ -14,11 +14,14 @@ const winner = document.querySelectorAll("#scores div");
 const roundScore = document.querySelectorAll("#scores div span");
 const numberOfRounds = document.querySelector("#numberOfRounds");
 const hands = document.querySelectorAll("#hands button");
+
 const startGame = document.querySelector("#start-game");
 const reset = document.querySelector("#reset");
 const quit = document.querySelector("#quit");
 const toggleHide = document.querySelector(".hide");
 
+
+const div = document.createElement('div');
 // console.log(numberOfRounds);
 
 function round(humanSelection, computerSelection = computerPlay()) {
@@ -75,6 +78,8 @@ quit.addEventListener("click", () => {
 function game(rounds) {
   // roundScoreComputer = 0;
   // roundScoreHuman = 0;
+  toggleHide.appendChild(div);
+  div.textContent = 'Welcome contestants!'
 
   hands.forEach((button) => {
     button.addEventListener("click", () => {
@@ -83,6 +88,8 @@ function game(rounds) {
       for(let i=0;i<=1;i++){
         if(roundScore[i].textContent == 5){
           console.log(winner[i].id+' wins.');
+          div.textContent = winner[i].id+' wins.';
+          
           // roundCount=0;
           roundScoreComputer=0;
           roundScoreHuman=0;

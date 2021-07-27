@@ -6,16 +6,27 @@ function computerPlay() {
 // const computerSelection = computerPlay();
 const winningHands = { Rock: "Scissors", Scissors: "Paper", Paper: "Rock" };
 
+let roundCount = 0;
 let roundScoreHuman = 0;
 let roundScoreComputer = 0;
 
+const winner = document.querySelectorAll("#scores div");
+const roundScore = document.querySelectorAll("#scores div span");
+const numberOfRounds = document.querySelector("#numberOfRounds");
+const hands = document.querySelectorAll("#hands button");
+const startGame = document.querySelector("#start-game");
+const reset = document.querySelector("#reset");
+const quit = document.querySelector("#quit");
+const toggleHide = document.querySelector(".hide");
+
+// console.log(numberOfRounds);
+
 function round(humanSelection, computerSelection = computerPlay()) {
-  console.log(`You picked ${humanSelection}`);
- 
-  let outcome;
 
   if (humanSelection == computerSelection) {
     outcome = "Tie";
+    // roundScoreHuman++;
+    // roundScoreComputer++;
   } else if (winningHands[humanSelection] == computerSelection) {
     outcome = "You win";
     roundScoreHuman++;
@@ -25,25 +36,58 @@ function round(humanSelection, computerSelection = computerPlay()) {
   }
 
   // return outcome;
-  console.log(`${outcome} 
-    Computer Wins: ${roundScoreComputer} Your Wins: ${roundScoreHuman}`);
+  // console.log(`${outcome} 
+  //   Computer Wins: ${roundScoreComputer} Your Wins: ${roundScoreHuman}`);
+
+  //print updated score to span
+  roundScore.forEach((span) => {
+    if (span.id == "computerScore") {
+      span.textContent = `${roundScoreComputer}`;
+    } else span.textContent = `${roundScoreHuman}`;
+  });
 }
 
-//gets all buttons under tag with id hands
-const hands = document.querySelectorAll("#hands button");
-
-//loops through each and runs round with the id as input (rock paper or scissors)
-hands.forEach((button) => {
-  button.addEventListener("click", () => {
-    round(button.id);
-  });
+startGame.addEventListener("click", () => {
+  toggleHide.classList.toggle('hide')
+  startGame.classList.toggle('hide');
+  game();
 });
 
-function game(rounds) {
-  roundScoreComputer = 0;
-  roundScoreHuman = 0;
+reset.addEventListener("click", () => {
+  resetGame();
+});
 
-  for (let i = 0; i < rounds; i++) {
-    round();
-  }
+function resetGame(){
+  roundScore.forEach((span) => {
+    span.textContent = '';
+  })
+  roundScoreComputer=0;
+  roundScoreHuman=0;
+  return;
+}
+quit.addEventListener("click", () => {
+  resetGame();
+  toggleHide.classList.toggle('hide')
+  startGame.classList.toggle('hide');
+
+})
+
+function game(rounds) {
+  // roundScoreComputer = 0;
+  // roundScoreHuman = 0;
+
+  hands.forEach((button) => {
+    button.addEventListener("click", () => {
+      round(button.id);
+
+      for(let i=0;i<=1;i++){
+        if(roundScore[i].textContent == 5){
+          console.log(winner[i].id+' wins.');
+          // roundCount=0;
+          roundScoreComputer=0;
+          roundScoreHuman=0;
+        }
+      }
+    });
+  });
 }
